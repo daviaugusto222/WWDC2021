@@ -7,6 +7,7 @@
 
 import UIKit
 import PlaygroundSupport
+import SpriteKit
 
 /// Instantiates a new instance of a live view.
 ///
@@ -23,4 +24,13 @@ public func instantiateLiveView() -> PlaygroundLiveViewable {
     }
 
     return liveViewController
+}
+
+public func planetsLiveView() -> PlaygroundLiveViewable {
+    let sceneView = SKView()
+    if let scene = PlanetsScene(fileNamed: "PlanetsScene") {
+        scene.scaleMode = .aspectFill
+        sceneView.presentScene(scene)
+    }
+ return sceneView
 }
