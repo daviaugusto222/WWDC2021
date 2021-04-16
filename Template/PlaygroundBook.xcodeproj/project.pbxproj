@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B6A40DA2628809300CAF78E /* Ribeye-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */; };
+		4B6A40DE2628868200CAF78E /* Ribeye-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */; };
 		4BB9E1E0262630CF00FD440E /* PlanetsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9E1DF262630CF00FD440E /* PlanetsScene.swift */; };
 		4BB9E1E5262632E000FD440E /* PlanetsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4BB9E1E4262632E000FD440E /* PlanetsScene.sks */; };
 		4BB9E1F626264E8500FD440E /* Mercurio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4BB9E1F526264E8400FD440E /* Mercurio.mp3 */; };
-		4BB9E1FB2626506100FD440E /* MemoryGameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9E1FA2626506100FD440E /* MemoryGameNode.swift */; };
+		4BB9E20B26267B2A00FD440E /* NamesGameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9E20A26267B2A00FD440E /* NamesGameNode.swift */; };
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
 		5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */; };
@@ -119,10 +121,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ribeye-Regular.ttf"; sourceTree = "<group>"; };
 		4BB9E1DF262630CF00FD440E /* PlanetsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsScene.swift; sourceTree = "<group>"; };
 		4BB9E1E4262632E000FD440E /* PlanetsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanetsScene.sks; sourceTree = "<group>"; };
 		4BB9E1F526264E8400FD440E /* Mercurio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Mercurio.mp3; sourceTree = "<group>"; };
-		4BB9E1FA2626506100FD440E /* MemoryGameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameNode.swift; sourceTree = "<group>"; };
+		4BB9E20A26267B2A00FD440E /* NamesGameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesGameNode.swift; sourceTree = "<group>"; };
 		5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeuPlaygroundLegal.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
 		5E086DCD2051DDB8004D8D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveView.storyboard; sourceTree = "<group>"; };
@@ -288,7 +291,7 @@
 				5EF2F9AD2054BBF300191409 /* LiveViewController.swift */,
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 				4BB9E1DF262630CF00FD440E /* PlanetsScene.swift */,
-				4BB9E1FA2626506100FD440E /* MemoryGameNode.swift */,
+				4BB9E20A26267B2A00FD440E /* NamesGameNode.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */,
 				4BB9E1F526264E8400FD440E /* Mercurio.mp3 */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				4BB9E1E4262632E000FD440E /* PlanetsScene.sks */,
@@ -480,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
+				4B6A40DA2628809300CAF78E /* Ribeye-Regular.ttf in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 				4BB9E1F626264E8500FD440E /* Mercurio.mp3 in Resources */,
@@ -492,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EA2E3CA2056F35B00416A35 /* LiveViewTestAppLaunchScreen.storyboard in Resources */,
+				4B6A40DE2628868200CAF78E /* Ribeye-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,10 +560,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BB9E1FB2626506100FD440E /* MemoryGameNode.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
 				4BB9E1E0262630CF00FD440E /* PlanetsScene.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
+				4BB9E20B26267B2A00FD440E /* NamesGameNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

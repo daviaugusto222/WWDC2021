@@ -9,12 +9,12 @@ import Foundation
 import SpriteKit
 
 public class Planet {
-    var node: SKShapeNode
+    var node: SKSpriteNode
     var lock: Bool
     var name: String
     var song: String
     
-    init(node: SKShapeNode, lock: Bool, name: String, song: String) {
+    init(node: SKSpriteNode, lock: Bool, name: String, song: String) {
         self.node = node
         self.lock = lock
         self.name = name
@@ -24,20 +24,58 @@ public class Planet {
 
 public class PlanetsScene: SKScene {
     
-
-    private var planets: [Planet] = []
-    private var planet = ["Mercurio", "Venus", "Terra", "Marte"]
-    private var positions = [CGPoint(x: 0, y: 100), CGPoint(x: 200, y: 200), CGPoint(x: -200, y: -200), CGPoint(x: 300, y: 300)]
-    private var sizes = [30, 40, 60, 40]
+    public var planets: [Planet] = []
+    private var planet = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+    private var positions = [CGPoint(x: 10, y: 200),
+                             CGPoint(x: 250, y: 50),
+                             CGPoint(x: -60, y: -260),
+                             CGPoint(x: -250, y: -60),
+                             CGPoint(x: 350, y: -250),
+                             CGPoint(x: -350, y: 250),
+                             CGPoint(x: 450, y: 280),
+                             CGPoint(x: -350, y: -350)]
     
-    var memoryGame: MemoryGameNode!
+    private var sizes = [CGSize(width: 100, height: 100),
+                         CGSize(width: 140, height: 140),
+                         CGSize(width: 160, height: 160),
+                         CGSize(width: 120, height: 120),
+                         CGSize(width: 250, height: 250),
+                         CGSize(width: 220, height: 220),
+                         CGSize(width: 180, height: 180),
+                         CGSize(width: 150, height: 150),
+                        ]
+    
+    private var background: SKSpriteNode!
+    
+    var namesGame: NamesGameNode!
 
     override public func didMove(to view: SKView) {
-    
+        
+        let fontURL = Bundle.main.url(forResource: "Ribeye-Regular", withExtension: "ttf")
+        CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
+       
+       
+        background = SKSpriteNode()
+        background.texture = SKTexture(imageNamed: "background")
+//        background.zPosition = -1
+        background.size = CGSize(width: self.frame.width, height: self.frame.height)
+        background.position = CGPoint(x: 0, y: 0)
+        addChild(background)
+        
+        
+        let sun = SKSpriteNode()
+        sun.texture = SKTexture(imageNamed: "Sun")
+        sun.size = CGSize(width: 300, height: 300)
+        sun.position = CGPoint(x: 0, y: 0)
+        sun.name = "Sun"
+
+        addChild(sun)
+        
+        
         for (index, planet) in planet.enumerated() {
-            let planeta = SKShapeNode(circleOfRadius: CGFloat(sizes[index]))
-            planeta.lineWidth = 0
-            planeta.fillColor = .green
+            let planeta = SKSpriteNode()
+            planeta.texture = SKTexture(imageNamed: "planetLock")
+            planeta.size = sizes[index]
             planeta.position = positions[index]
             planeta.name = planet
     
@@ -45,28 +83,36 @@ public class PlanetsScene: SKScene {
             
             planets.append(Planet(node: planeta, lock: true, name: planet, song: "\(planet).mp3"))
         }
-         
+        
+        
+        
+        
     }
-
 
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let frontTouchNode = atPoint(location)
-        
-        if (frontTouchNode.name == planets[0].node.name) {
-            
-            if planets[0].lock == false {
-                planets[0].node.fillColor = .blue
-                let soundAction = SKAction.playSoundFileNamed(planets[0].song, waitForCompletion: false)
-                planets[0].node.run(soundAction)
-            } else {
-                memoryGame = MemoryGameNode(planetsScene: self)
-                addChild(memoryGame)
+        for planety in planets {
+            if (frontTouchNode.name == planety.node.name) {
+                
+                if planety.lock == false {
+                    let soundAction = SKAction.playSoundFileNamed(planety.song, waitForCompletion: false)
+                    planety.node.run(soundAction)
+                } else {
+                    namesGame = NamesGameNode(planetsScene: self, planet: planety)
+                    namesGame.delegate = self
+                    namesGame.setScale(0)
+                    
+                    
+                    addChild(namesGame)
+                    
+                    let repeatAction = SKAction.sequence([SKAction.unhide(),  SKAction.scale(to: 1, duration: 0.4) ])
+                    namesGame.run(repeatAction)
+                }
             }
-            
-            
         }
+        
     }
 
     override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,3 +128,25 @@ public class PlanetsScene: SKScene {
     }
 }
 
+extension PlanetsScene: PlanetDelegate {
+    func completePlanet(planet: Planet) {
+        for item in planets {
+            if item.name == planet.name {
+                item.lock = false
+//                item.node.texture = SKTexture(imageNamed: planet.name)
+                let point = item.node.position
+                let size = item.node.size
+                let action = SKAction.sequence([SKAction.wait(forDuration: 2),
+                                                SKAction.move(to: CGPoint(x: self.frame.midX, y: self.frame.midY), duration: 0.5),
+                                                SKAction.scale(to: 3, duration: 0.7),
+                                                SKAction.fadeIn(withDuration: 0.2),
+                                                SKAction.setTexture(SKTexture(imageNamed: planet.name)),
+                                                SKAction.wait(forDuration: 1),
+                                                SKAction.move(to: point, duration: 0.5),
+                                                SKAction.scale(to: size, duration: 0.3) ])
+                item.node.run(action)
+                
+            }
+        }
+    }
+}
