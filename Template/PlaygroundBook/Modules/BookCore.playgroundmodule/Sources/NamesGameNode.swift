@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 protocol PlanetDelegate {
     func completePlanet(planet: Planet)
@@ -17,16 +18,20 @@ class NamesGameNode: SKNode {
     var planetsScene: PlanetsScene
         
     var backgroud = SKSpriteNode()
-    var close = SKShapeNode()
+    var close = SKSpriteNode()
     var card = SKSpriteNode()
     var letter = SKLabelNode()
     var planet: Planet!
+    
+    var labelSpeak = SKLabelNode()
     
     var nodeCards: [SKNode] = []
     var nodeLetters: [SKNode] = []
     private var currentNode: SKNode?
     
     var delegate: PlanetDelegate?
+    
+    let synthesizer = AVSpeechSynthesizer()
     
     override var isUserInteractionEnabled: Bool {
         set {
@@ -44,11 +49,17 @@ class NamesGameNode: SKNode {
         setupNodes()
         setupCards(word: planet.name)
         setupLetters(word: planet.name)
+        
+        
+        synthesizer.delegate = self
     }
         
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
+    
     
     func setupNodes() {
         addChild(backgroud)
@@ -58,8 +69,8 @@ class NamesGameNode: SKNode {
         backgroud.size = CGSize(width: planetsScene.frame.width / 1.2, height: planetsScene.frame.height / 1.5)
         backgroud.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
-        close.path = CGPath(rect:  CGRect(x: 0, y: 0, width: 50, height: 50), transform: nil)
-        close.fillColor = .red
+        close.texture = SKTexture(imageNamed: "close")
+        close.size = CGSize(width: 30, height: 30)
         close.name = "close"
         close.position = CGPoint(x: backgroud.frame.width/2 - 40, y: backgroud.frame.height/2 - 40)
     }
@@ -99,6 +110,7 @@ class NamesGameNode: SKNode {
             
         }
     }
+    
     func setupLetters(word: String) {
         
         var letters = word.map { String($0) }
@@ -155,7 +167,6 @@ class NamesGameNode: SKNode {
         let frontTouchNode = atPoint(location)
 
         if (frontTouchNode.name == close.name) {
-            close.fillColor = .blue
             self.isHidden = true
             
         }
@@ -202,11 +213,7 @@ class NamesGameNode: SKNode {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else { return }
-//        let location = touch.location(in: self)
-//        let frontTouchNode = atPoint(location)
-        
-//        let touchedNodes = self.nodes(at: location)
+
         guard let current = self.currentNode else { return }
         current.removeAllActions()
         
@@ -221,7 +228,7 @@ class NamesGameNode: SKNode {
             }
             
             if node.contains(current.position) && nodeName.starts(with: currentName) {
-                let nod = node as! SKSpriteNode
+                guard let nod = node as? SKSpriteNode else { return }
                 let repeatAction = SKAction.sequence([SKAction.scale(to: 0, duration: 0.2), SKAction.hide()])
                 current.run(repeatAction)
                 
@@ -232,6 +239,13 @@ class NamesGameNode: SKNode {
                 let actionNod = SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1), SKAction.scale(to: 1, duration: 0.2), SKAction.colorize(with: .green, colorBlendFactor: 0.4, duration: 0.3)])
                 nod.run(actionNod)
                 
+                labelSpeak.text = current.name
+                guard let name = labelSpeak.text?.lowercased() else { return }
+                let utterance = AVSpeechUtterance(string: name)
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+
+
+                synthesizer.speak(utterance)
                    
                 
                 
@@ -254,13 +268,37 @@ class NamesGameNode: SKNode {
                 card.run(action)
             }
             
-            
-            let repeatAction = SKAction.sequence([SKAction.wait(forDuration: 2), SKAction.scale(to: 0, duration: 0.2)])
+            let repeatAction = SKAction.sequence([SKAction.wait(forDuration: 1),
+                                                  SKAction.customAction(withDuration: 0, actionBlock: {_,_ in
+                                                    
+                                                    self.labelSpeak.text = self.planet.name
+                                                    
+                                                    let utterance = AVSpeechUtterance(string: self.planet.name.lowercased())
+                                                    utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                                                    
+                                                    self.synthesizer.speak(utterance)
+                                                    
+                                                  }),
+                                                  SKAction.wait(forDuration: 1),
+                                                  SKAction.scale(to: 0, duration: 0.2)])
             self.run(repeatAction)
+            
             delegate?.completePlanet(planet: planet)
         }
 
         self.currentNode = nil
     }
     
+}
+
+extension NamesGameNode: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        let mutableAttributedString = NSMutableAttributedString(string: utterance.speechString)
+        mutableAttributedString.addAttribute(.foregroundColor, value: UIColor.red, range: characterRange)
+        labelSpeak.attributedText = mutableAttributedString
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        labelSpeak.attributedText = NSAttributedString(string: utterance.speechString)
+    }
 }

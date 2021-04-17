@@ -24,7 +24,7 @@ public class Planet {
 
 public class PlanetsScene: SKScene {
     
-    public var planets: [Planet] = []
+    private var planets: [Planet] = []
     private var planet = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
     private var positions = [CGPoint(x: 10, y: 200),
                              CGPoint(x: 250, y: 50),
@@ -44,6 +44,7 @@ public class PlanetsScene: SKScene {
                          CGSize(width: 180, height: 180),
                          CGSize(width: 150, height: 150),
                         ]
+    private var sun: SKSpriteNode!
     
     private var background: SKSpriteNode!
     
@@ -63,7 +64,7 @@ public class PlanetsScene: SKScene {
         addChild(background)
         
         
-        let sun = SKSpriteNode()
+        sun = SKSpriteNode()
         sun.texture = SKTexture(imageNamed: "Sun")
         sun.size = CGSize(width: 300, height: 300)
         sun.position = CGPoint(x: 0, y: 0)
@@ -81,7 +82,7 @@ public class PlanetsScene: SKScene {
     
             addChild(planeta)
             
-            planets.append(Planet(node: planeta, lock: true, name: planet, song: "\(planet).mp3"))
+            planets.append(Planet(node: planeta, lock: true, name: planet, song: "\(planet).m4a"))
         }
         
         
@@ -93,11 +94,64 @@ public class PlanetsScene: SKScene {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let frontTouchNode = atPoint(location)
+        
+        //Se tocar no Sol
+        if frontTouchNode.name == sun.name {
+            let soundAction = SKAction.group([
+                SKAction.playSoundFileNamed("Sun.m4a", waitForCompletion: false),
+                SKAction.sequence([SKAction.setTexture(SKTexture(imageNamed: "SunSing")),
+                                   SKAction.wait(forDuration: 4),
+                                   SKAction.setTexture(SKTexture(imageNamed: "Sun")),]),
+                SKAction.customAction(withDuration: 0, actionBlock: { (_, _) in
+                    for planety in self.planets {
+                        if !planety.lock {
+                            let soundAction = SKAction.sequence([
+                                SKAction.playSoundFileNamed(planety.song, waitForCompletion: false),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                                SKAction.wait(forDuration: 1),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)")),
+                                SKAction.wait(forDuration: 1),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                                SKAction.wait(forDuration: 1),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)")),
+                                SKAction.wait(forDuration: 1),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                                SKAction.wait(forDuration: 1),
+                                SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)"))
+                                
+                            ])
+                                
+                            planety.node.run(soundAction)
+                            
+                        }
+                    }
+                })
+            ])
+                
+            sun.run(soundAction)
+        }
+        
+        //Se tocar no planeta
         for planety in planets {
-            if (frontTouchNode.name == planety.node.name) {
+            if frontTouchNode.name == planety.node.name {
                 
                 if planety.lock == false {
-                    let soundAction = SKAction.playSoundFileNamed(planety.song, waitForCompletion: false)
+                    let soundAction = SKAction.sequence([
+                        SKAction.playSoundFileNamed(planety.song, waitForCompletion: false),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)")),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)")),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)Sing")),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.setTexture(SKTexture(imageNamed: "\(planety.name)"))
+                        
+                    ])
+                    
                     planety.node.run(soundAction)
                 } else {
                     namesGame = NamesGameNode(planetsScene: self, planet: planety)
@@ -139,8 +193,7 @@ extension PlanetsScene: PlanetDelegate {
                 let action = SKAction.sequence([SKAction.wait(forDuration: 2),
                                                 SKAction.move(to: CGPoint(x: self.frame.midX, y: self.frame.midY), duration: 0.5),
                                                 SKAction.scale(to: 3, duration: 0.7),
-                                                SKAction.fadeIn(withDuration: 0.2),
-                                                SKAction.setTexture(SKTexture(imageNamed: planet.name)),
+                                                SKAction.setTexture(SKTexture(imageNamed: item.name)),
                                                 SKAction.wait(forDuration: 1),
                                                 SKAction.move(to: point, duration: 0.5),
                                                 SKAction.scale(to: size, duration: 0.3) ])
