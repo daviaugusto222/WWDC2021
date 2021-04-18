@@ -34,3 +34,12 @@ public func planetsLiveView() -> PlaygroundLiveViewable {
     }
  return sceneView
 }
+
+public func introductionLiveView() -> PlaygroundLiveViewable {
+    let sceneView = SKView()
+    if let scene = IntroductionScene(fileNamed: "IntroductionScene") {
+        scene.scaleMode = .aspectFill
+        sceneView.presentScene(scene)
+    }
+ return sceneView
+}

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4B6A40DA2628809300CAF78E /* Ribeye-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */; };
 		4B6A40DE2628868200CAF78E /* Ribeye-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */; };
+		4B92B73C262A860C0093A49A /* cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B92B73B262A860C0093A49A /* cover.png */; };
+		4B92B74A262BB6C90093A49A /* IntroductionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B92B749262BB6C90093A49A /* IntroductionScene.swift */; };
+		4B92B74F262BBAAF0093A49A /* IntroductionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B92B74E262BBAAF0093A49A /* IntroductionScene.sks */; };
 		4BB7039A262A32FC00CBD9C7 /* Uranus.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4BB70391262A32FB00CBD9C7 /* Uranus.m4a */; };
 		4BB7039B262A32FC00CBD9C7 /* Mercury.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4BB70392262A32FB00CBD9C7 /* Mercury.m4a */; };
 		4BB7039C262A32FC00CBD9C7 /* Neptune.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4BB70393262A32FB00CBD9C7 /* Neptune.m4a */; };
@@ -130,6 +133,9 @@
 
 /* Begin PBXFileReference section */
 		4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ribeye-Regular.ttf"; sourceTree = "<group>"; };
+		4B92B73B262A860C0093A49A /* cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cover.png; sourceTree = "<group>"; };
+		4B92B749262BB6C90093A49A /* IntroductionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionScene.swift; sourceTree = "<group>"; };
+		4B92B74E262BBAAF0093A49A /* IntroductionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroductionScene.sks; sourceTree = "<group>"; };
 		4BB70391262A32FB00CBD9C7 /* Uranus.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Uranus.m4a; sourceTree = "<group>"; };
 		4BB70392262A32FB00CBD9C7 /* Mercury.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mercury.m4a; sourceTree = "<group>"; };
 		4BB70393262A32FB00CBD9C7 /* Neptune.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Neptune.m4a; sourceTree = "<group>"; };
@@ -142,7 +148,7 @@
 		4BB9E1DF262630CF00FD440E /* PlanetsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsScene.swift; sourceTree = "<group>"; };
 		4BB9E1E4262632E000FD440E /* PlanetsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanetsScene.sks; sourceTree = "<group>"; };
 		4BB9E20A26267B2A00FD440E /* NamesGameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesGameNode.swift; sourceTree = "<group>"; };
-		5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeuPlaygroundLegal.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E086DC02051C5A7004D8D25 /* ThePlanets.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThePlanets.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
 		5E086DCD2051DDB8004D8D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveView.storyboard; sourceTree = "<group>"; };
 		5E086DCF2051DF0F004D8D25 /* Manifest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
@@ -215,7 +221,7 @@
 		5E086DA4204F706E004D8D25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */,
+				5E086DC02051C5A7004D8D25 /* ThePlanets.playgroundbook */,
 				5EF2F9AB2054BBF300191409 /* libBookCore.a */,
 				5E6F7E612368FB6A008CC191 /* libBookAPI.a */,
 				5EA2E3BD2056F35A00416A35 /* LiveViewTestApp.app */,
@@ -324,6 +330,7 @@
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 				4BB9E1DF262630CF00FD440E /* PlanetsScene.swift */,
 				4BB9E20A26267B2A00FD440E /* NamesGameNode.swift */,
+				4B92B749262BB6C90093A49A /* IntroductionScene.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -368,12 +375,14 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				4B92B73B262A860C0093A49A /* cover.png */,
 				4BB7038D262A31DB00CBD9C7 /* Songs */,
 				4B6A40D92628809300CAF78E /* Ribeye-Regular.ttf */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				4BB9E1E4262632E000FD440E /* PlanetsScene.sks */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
+				4B92B74E262BBAAF0093A49A /* IntroductionScene.sks */,
 			);
 			path = PrivateResources;
 			sourceTree = "<group>";
@@ -406,7 +415,7 @@
 			);
 			name = PlaygroundBook;
 			productName = PlaygroundBook;
-			productReference = 5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */;
+			productReference = 5E086DC02051C5A7004D8D25 /* ThePlanets.playgroundbook */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5E6F7E602368FB6A008CC191 /* BookAPI */ = {
@@ -519,9 +528,11 @@
 				4BB7039E262A32FC00CBD9C7 /* Venus.m4a in Resources */,
 				4BB7039A262A32FC00CBD9C7 /* Uranus.m4a in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
+				4B92B74F262BBAAF0093A49A /* IntroductionScene.sks in Resources */,
 				4BB7039C262A32FC00CBD9C7 /* Neptune.m4a in Resources */,
 				4BB7039D262A32FC00CBD9C7 /* Sun.m4a in Resources */,
 				4B6A40DA2628809300CAF78E /* Ribeye-Regular.ttf in Resources */,
+				4B92B73C262A860C0093A49A /* cover.png in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				4BB703A0262A32FC00CBD9C7 /* Saturn.m4a in Resources */,
 				4BB7039F262A32FC00CBD9C7 /* Earth.m4a in Resources */,
@@ -604,6 +615,7 @@
 				4BB9E1E0262630CF00FD440E /* PlanetsScene.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				4BB9E20B26267B2A00FD440E /* NamesGameNode.swift in Sources */,
+				4B92B74A262BB6C90093A49A /* IntroductionScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

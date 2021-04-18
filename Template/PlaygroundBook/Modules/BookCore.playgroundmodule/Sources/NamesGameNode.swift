@@ -96,6 +96,7 @@ class NamesGameNode: SKNode {
             lettery.fontSize = cardy.frame.height/2
             lettery.fontColor = .black
             lettery.fontName = "Ribeye-Regular"
+            
             lettery.text = lett
             lettery.verticalAlignmentMode = .center
             lettery.horizontalAlignmentMode = .center
